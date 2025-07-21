@@ -1,0 +1,41 @@
+# Arquivos de Sistema Operacional
+.DS_Store
+.env
+.idea/ # Se você usa PyCharm ou outras IDEs JetBrains
+.vscode/ # Se você usa VS Code
+Thumbs.db
+
+# Ignorar o ambiente virtual
+venv/
+env/
+*.pyc
+__pycache__/
+
+# Arquivos Django
+*.log
+*.sqlite3
+db.sqlite3 # Ignora o banco de dados SQLite local
+/media/ # Diretório para uploads de mídia (geralmente gerenciado pelo Django)
+/static/ # Diretório onde o collectstatic coloca os arquivos (se você não usa WhiteNoise para servir direto)
+/staticfiles/ # Se você usa STATIC_ROOT para coletar estáticos
+
+# Arquivos de Dependências e Build
+pip-debug.log
+.python-version # Se você usa pyenv
+htmlcov/ # Cobertura de testes
+.coverage
+.tox/ # Testes tox
+dist/
+build/
+*.egg-info/
+.pytest_cache/
+
+# Arquivos Gerados Automaticamente
+*.mo
+*.pot
+
+# Arquivos de Variáveis de Ambiente
+# EXTREMAMENTE IMPORTANTE: Não envie suas variáveis de ambiente para o Git!
+.env
+.flaskenv # Se estiver usando Flask, apenas como exemplo
+.npmrc # Se usar npm para front-end

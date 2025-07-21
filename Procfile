@@ -1,0 +1,1 @@
+web: gunicorn canesgril.wsgi:application --log-file -
