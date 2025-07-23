@@ -1,10 +1,10 @@
 #DATABASE_URL="postgresql://postgres:[YOUR-PASSWORD]@db.[YOUR-PROJECT-REF].supabase.co:5432/postgres"
-# ou se preferir definir separadamente:
 dbname=postgres
 user=postgres
 password=sua_senha_secreta
 host=db.[YOUR-PROJECT-REF].supabase.co
 port=5432
-DJANGO_ALLOWED_HOSTS=10.54.20.32
+
+DJANGO_ALLOWED_HOSTS=104.18.25.53
 DJANGO_DEBUG=False
 DJANGO_SECRET_KEY=Sua_Secret_Key

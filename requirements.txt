@@ -1,0 +1,14 @@
+asgiref
+dj-database-url
+Django
+django-stdimage
+gunicorn
+packaging
+pillow
+psycopg2
+psycopg2-binary
+python-dotenv
+sqlparse
+tzdata
+whitenoise
+gunicorn
