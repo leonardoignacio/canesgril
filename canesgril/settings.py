@@ -152,19 +152,9 @@ AWS_QUERYSTRING_AUTH = False # Evita adicionar credenciais na URL da imagem
 '''
 
 AWS_S3_ENDPOINT_URL = os.environ.get('SUPABASE_STORAGE_URL')
+AWS_ACCESS_KEY_ID = os.environ.get('SUPABASE_STORAGE_ACCESS_KEY') # Onde o "Access key ID" vai
+AWS_SECRET_ACCESS_KEY = os.environ.get('SUPABASE_STORAGE_SECRET_KEY') # Onde o "Secret access key" vai
 AWS_STORAGE_BUCKET_NAME = os.environ.get('SUPABASE_STORAGE_BUCKET')
-
-# Chaves de Autenticação
-# Use a chave 'anon' para AWS_ACCESS_KEY_ID (pública)
-AWS_ACCESS_KEY_ID = os.environ.get('SUPABASE_STORAGE_ACCESS_KEY')
-
-# Use a chave 'service_role' para AWS_SECRET_ACCESS_KEY (secreta e com mais privilégios)
-AWS_SECRET_ACCESS_KEY = os.environ.get('SUPABASE_STORAGE_SECRET_KEY')
-
-print(f"DEBUG: AWS_S3_ENDPOINT_URL={AWS_S3_ENDPOINT_URL}")
-print(f"DEBUG: AWS_ACCESS_KEY_ID={AWS_ACCESS_KEY_ID[:5]}... (primeiros 5 chars)") # Imprime só o início da chave
-print(f"DEBUG: AWS_SECRET_ACCESS_KEY={AWS_SECRET_ACCESS_KEY[:5]}... (primeiros 5 chars)") # Imprime só o início da chave
-# print(f"DEBUG: AWS_STORAGE_BUCKET_NAME={AWS_STORAGE_BUCKET_NAME}")
 
 AWS_DEFAULT_ACL = 'public-read' # Se seu bucket é público no Supabase
 AWS_S3_FILE_OVERWRITE = False # Não sobrescrever arquivos com o mesmo nome
