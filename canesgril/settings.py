@@ -142,10 +142,18 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # --- Configurações do Supabase Storage via django-storages ---
 # Variáveis de ambiente que serão lidas do ambiente do Railway.
-AWS_S3_ENDPOINT_URL = os.environ.get('SUPABASE_STORAGE_URL')
+'''AWS_S3_ENDPOINT_URL = os.environ.get('SUPABASE_STORAGE_URL')
 AWS_ACCESS_KEY_ID = os.environ.get('SUPABASE_STORAGE_ACCESS_KEY')
 AWS_SECRET_ACCESS_KEY = os.environ.get('SUPABASE_STORAGE_SECRET_KEY')
 AWS_STORAGE_BUCKET_NAME = os.environ.get('SUPABASE_STORAGE_BUCKET')
+AWS_DEFAULT_ACL = 'public-read' # Se seu bucket é público no Supabase
+AWS_S3_FILE_OVERWRITE = False # Não sobrescrever arquivos com o mesmo nome
+AWS_QUERYSTRING_AUTH = False # Evita adicionar credenciais na URL da imagem
+'''
+AWS_S3_ENDPOINT_URL = 'https://wrqjtdslwxtxflffaxzd.supabase.co/storage/v1/s3'
+AWS_ACCESS_KEY_ID = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndycWp0ZHNsd3h0eGZsZmZheHpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMxMTQ0MzAsImV4cCI6MjA2ODY5MDQzMH0.XcO9e0mmfIuANcT_pSzuKcF49BVLbLoCZDml5hAc_4c'
+AWS_SECRET_ACCESS_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndycWp0ZHNsd3h0eGZsZmZheHpkIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1MzExNDQzMCwiZXhwIjoyMDY4NjkwNDMwfQ.YraJXKVVrd9uzdsZq3P0yz6tW-Ujea0JfeOCp1777qU'
+AWS_STORAGE_BUCKET_NAME = 'canesgril-media'
 AWS_DEFAULT_ACL = 'public-read' # Se seu bucket é público no Supabase
 AWS_S3_FILE_OVERWRITE = False # Não sobrescrever arquivos com o mesmo nome
 AWS_QUERYSTRING_AUTH = False # Evita adicionar credenciais na URL da imagem
