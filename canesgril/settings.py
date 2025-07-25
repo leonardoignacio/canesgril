@@ -31,7 +31,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 DEBUG = os.environ.get('DJANGO_DEBUG', '.railway.app', 'False') == 'True'
 #DEBUG=True
 #ALLOWED_HOSTS = ['*']
-ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
+ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS','.railway.app', 'canesgril-production.up.railway.app', 'localhost', '127.0.0.1').split(',')
 
 # Application definition
 
@@ -142,3 +142,17 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Força o uso de cookies CSRF apenas em conexões HTTPS
+CSRF_COOKIE_SECURE = True
+
+# Força o uso de cookies de sessão apenas em conexões HTTPS
+SESSION_COOKIE_SECURE = True
+
+# Adicione o domínio base do Railway e qualquer domínio personalizado
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.railway.app',             # Para cobrir seu domínio Railway padrão
+    'https://canesgril-production.up.railway.app', # O domínio exato do seu ambiente de produção
+    # 'https://seusitepersonalizado.com',  # Se você tiver um domínio personalizado
+    # 'https://www.seusitepersonalizado.com', # E a versão com www
+]
