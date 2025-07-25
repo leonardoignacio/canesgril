@@ -150,16 +150,35 @@ AWS_DEFAULT_ACL = 'public-read' # Se seu bucket é público no Supabase
 AWS_S3_FILE_OVERWRITE = False # Não sobrescrever arquivos com o mesmo nome
 AWS_QUERYSTRING_AUTH = False # Evita adicionar credenciais na URL da imagem
 '''
-AWS_S3_ENDPOINT_URL = 'https://wrqjtdslwxtxflffaxzd.supabase.co/storage/v1/s3'
-AWS_ACCESS_KEY_ID = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndycWp0ZHNsd3h0eGZsZmZheHpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMxMTQ0MzAsImV4cCI6MjA2ODY5MDQzMH0.XcO9e0mmfIuANcT_pSzuKcF49BVLbLoCZDml5hAc_4c'
-AWS_SECRET_ACCESS_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndycWp0ZHNsd3h0eGZsZmZheHpkIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1MzExNDQzMCwiZXhwIjoyMDY4NjkwNDMwfQ.YraJXKVVrd9uzdsZq3P0yz6tW-Ujea0JfeOCp1777qU'
-AWS_STORAGE_BUCKET_NAME = 'canesgril-media'
+
+AWS_S3_ENDPOINT_URL = os.environ.get('SUPABASE_STORAGE_URL')
+AWS_STORAGE_BUCKET_NAME = os.environ.get('SUPABASE_STORAGE_BUCKET')
+
+# Chaves de Autenticação
+# Use a chave 'anon' para AWS_ACCESS_KEY_ID (pública)
+AWS_ACCESS_KEY_ID = os.environ.get('SUPABASE_STORAGE_ACCESS_KEY')
+
+# Use a chave 'service_role' para AWS_SECRET_ACCESS_KEY (secreta e com mais privilégios)
+AWS_SECRET_ACCESS_KEY = os.environ.get('SUPABASE_STORAGE_SECRET_KEY')
+
+print(f"DEBUG: AWS_S3_ENDPOINT_URL={AWS_S3_ENDPOINT_URL}")
+print(f"DEBUG: AWS_ACCESS_KEY_ID={AWS_ACCESS_KEY_ID[:5]}... (primeiros 5 chars)") # Imprime só o início da chave
+print(f"DEBUG: AWS_SECRET_ACCESS_KEY={AWS_SECRET_ACCESS_KEY[:5]}... (primeiros 5 chars)") # Imprime só o início da chave
+# print(f"DEBUG: AWS_STORAGE_BUCKET_NAME={AWS_STORAGE_BUCKET_NAME}")
+
 AWS_DEFAULT_ACL = 'public-read' # Se seu bucket é público no Supabase
 AWS_S3_FILE_OVERWRITE = False # Não sobrescrever arquivos com o mesmo nome
-AWS_QUERYSTRING_AUTH = False # Evita adicionar credenciais na URL da imagem
+AWS_QUERYSTRING_AUTH = False # Importante: Não adiciona credenciais na URL da imagem, bom para CDN.
 
-# Define um subdiretório dentro do seu bucket Supabase 
+
 AWS_LOCATION = 'media-uploads'
+
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+
+
+
 # --- Define o Backend de Armazenamento Padrão crucial para usar o Supabase Storage
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
