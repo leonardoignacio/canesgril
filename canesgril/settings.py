@@ -28,10 +28,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY') 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DJANGO_DEBUG', '.railway.app', 'False') == 'True'
+DEBUG = False
 #DEBUG=True
 #ALLOWED_HOSTS = ['*']
-ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS','.railway.app', 'canesgril-production.up.railway.app', 'localhost', '127.0.0.1').split(',')
+ALLOWED_HOSTS = ['.railway.app', 'canesgril-production.up.railway.app', 'localhost', '104.18.11.246', '66.33.22.120', '127.0.0.1']
 
 # Application definition
 
