@@ -11,5 +11,7 @@ python-dotenv
 sqlparse
 tzdata
 whitenoise
+django-storages
+boto3
 gunicorn
 whitenoise

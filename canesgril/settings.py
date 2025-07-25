@@ -130,13 +130,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
+#STATIC_URL = 'static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 # Para ambiente de produção
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' #python manage.py collectstatic
+#STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' #python manage.py collectstatic
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+#MEDIA_URL = '/media/'
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
@@ -156,3 +160,30 @@ CSRF_TRUSTED_ORIGINS = [
     # 'https://seusitepersonalizado.com',  # Se você tiver um domínio personalizado
     # 'https://www.seusitepersonalizado.com', # E a versão com www
 ]
+
+# --- Configurações do Supabase Storage ---
+SUPABASE_STORAGE_URL = os.environ.get('SUPABASE_STORAGE_URL')
+SUPABASE_STORAGE_BUCKET = os.environ.get('SUPABASE_STORAGE_BUCKET')
+SUPABASE_STORAGE_ACCESS_KEY = os.environ.get('SUPABASE_STORAGE_ACCESS_KEY')
+SUPABASE_STORAGE_SECRET_KEY = os.environ.get('SUPABASE_STORAGE_SECRET_KEY')
+
+# --- Configurações de variáveis que o django-storages se conecta ao Supabase Storage.
+AWS_S3_ENDPOINT_URL = os.environ.get('SUPABASE_STORAGE_URL') # Define o endpoint do Supabase
+AWS_ACCESS_KEY_ID = os.environ.get('SUPABASE_STORAGE_ACCESS_KEY') # Usa sua chave anon do Supabase
+AWS_SECRET_ACCESS_KEY = os.environ.get('SUPABASE_STORAGE_SECRET_KEY') # Usa sua chave service_role do Supabase
+AWS_STORAGE_BUCKET_NAME = os.environ.get('SUPABASE_STORAGE_BUCKET') # Nome do bucket que você criou
+
+# Configurações adicionais para o S3
+AWS_DEFAULT_ACL = 'public-read' # Permite que os arquivos sejam lidos publicamente. Remova ou mude se seu bucket for privado.
+AWS_S3_FILE_OVERWRITE = False # Evita sobrescrever arquivos com o mesmo nome
+AWS_QUERYSTRING_AUTH = False # Importante: Não adiciona credenciais na URL da imagem (útil para CDNs e URLs limpas)
+
+# Opcional: Define um subdiretório dentro do seu bucket para os uploads do Django.
+# Por exemplo, suas imagens ficarão em s3://[nome-do-bucket]/media-uploads/imagem.jpg
+# Se quiser que fiquem na raiz do bucket, pode remover esta linha ou deixar como vazio ('').
+AWS_LOCATION = 'media-uploads'
+
+# --- Define o Backend de Armazenamento Padrão ---
+# Esta é a linha mais importante: informa ao Django para usar o S3 (Supabase) para todos os FileFields.
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+

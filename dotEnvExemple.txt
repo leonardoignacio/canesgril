@@ -1,3 +1,5 @@
+DJANGO_SECRET_KEY=Sua_Secret_Key
+
 #DATABASE_URL="postgresql://postgres:[YOUR-PASSWORD]@db.[YOUR-PROJECT-REF].supabase.co:5432/postgres"
 dbname=postgres
 user=postgres
@@ -5,6 +7,10 @@ password=sua_senha_secreta
 host=db.[YOUR-PROJECT-REF].supabase.co
 port=5432
 
-DJANGO_ALLOWED_HOSTS=104.18.10.246 #railway.app
-DJANGO_DEBUG=False
-DJANGO_SECRET_KEY=Sua_Secret_Key
+
+#Storage-supabase
+SUPABASE_STORAGE_URL=https://Sua_URL
+SUPABASE_STORAGE_BUCKET=Seu_Bucket
+SUPABASE_STORAGE_ACCESS_KEY=SUA_CHAVE_DE_API_ANON_DO_SUPABASE
+SUPABASE_STORAGE_SECRET_KEY=SUA_CHAVE_DE_API_SERVICE_ROLE_DO_SUPABASE
+
