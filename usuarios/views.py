@@ -82,8 +82,10 @@ def cria_prato(request):
         modo_preparo = request.POST['modo_preparo'] 
         tempo_preparo = request.POST['tempo_preparo'] 
         rendimento = request.POST['rendimento'] 
-        categoria = request.POST['categoria'] 
-        foto_prato = request.FILES['foto_prato']
+        categoria = request.POST['categoria']
+        foto_prato = ''
+        if 'foto_prato' in request.FILES: 
+            foto_prato = request.FILES['foto_prato']
         user = get_object_or_404(User, pk=request.user.id) 
         prato = Prato.objects.create(
             pessoa=user, 
@@ -117,8 +119,8 @@ def atualiza_prato(request):
         p.categoria = request.POST['categoria'] 
         if 'foto_prato' in request.FILES: 
             p.foto_prato = request.FILES['foto_prato'] 
-            p.save() 
-            return redirect('dashboard')
+        p.save() 
+        return redirect('dashboard')
 
 def deleta_prato(request, prato_id): 
     prato = get_object_or_404(Prato, pk=prato_id) 
