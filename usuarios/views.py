@@ -38,7 +38,7 @@ def logout(request):
 def dashboard(request):
     if request.user.is_authenticated:
         id = request.user.id
-        pratos = Prato.objects.order_by('-date_prato').filter( funcionario_id=id)
+        pratos = Prato.objects.order_by('date_prato').filter( funcionario_id=id)
         paginator = Paginator(pratos, 3) 
         page = request.GET.get('page') 
         pratos_por_pagina = paginator.get_page(page)
