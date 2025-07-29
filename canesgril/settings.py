@@ -13,16 +13,12 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from pathlib import Path
 import os
 from dotenv import load_dotenv
-import dj_database_url #Se for converter URL em dicionário
+#import dj_database_url #Se for converter URL em dicionário
+
 load_dotenv() # Vaiaveis de ambiente do arquivo .env
-
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY') 
@@ -45,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'storages',
+    #'storages',
+    'django_storage_supabase',
 ]
 
 MIDDLEWARE = [
@@ -140,16 +137,6 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')] # Mantido, útil para estr
 # Whitenoise é a escolha ideal para Railway.
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# --- Configurações do Supabase Storage via django-storages ---
-# Variáveis de ambiente que serão lidas do ambiente do Railway.
-'''AWS_S3_ENDPOINT_URL = os.environ.get('SUPABASE_STORAGE_URL')
-AWS_ACCESS_KEY_ID = os.environ.get('SUPABASE_STORAGE_ACCESS_KEY')
-AWS_SECRET_ACCESS_KEY = os.environ.get('SUPABASE_STORAGE_SECRET_KEY')
-AWS_STORAGE_BUCKET_NAME = os.environ.get('SUPABASE_STORAGE_BUCKET')
-AWS_DEFAULT_ACL = 'public-read' # Se seu bucket é público no Supabase
-AWS_S3_FILE_OVERWRITE = False # Não sobrescrever arquivos com o mesmo nome
-AWS_QUERYSTRING_AUTH = False # Evita adicionar credenciais na URL da imagem
-'''
 
 SUPABASE_URL = os.environ.get('SUPABASE_URL')
 SUPABASE_KEY = os.environ.get('SUPABASE_KEY') # Sua chave anon ou service_role
@@ -158,7 +145,7 @@ SUPABASE_BUCKET_NAME = os.environ.get('SUPABASE_BUCKET_NAME')
 # Configuração do Default File Storage
 DEFAULT_FILE_STORAGE = 'django_storage_supabase.storage.SupabaseStorage'
 # Opcional: Configurar o URL base para arquivos de mídia
-MEDIA_URL = f"{SUPABASE_URL}/storage/v1/object/public/{SUPABASE_BUCKET_NAME}/"
+MEDIA_URL = f"{SUPABASE_URL}/storage/v1/object/public/{SUPABASE_BUCKET_NAME}/" # media-uploads
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
