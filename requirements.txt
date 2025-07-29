@@ -12,8 +12,8 @@ sqlparse
 tzdata
 whitenoise
 django-storages
-supabase
 django-storage-supabase
+supabase>=2.0.0
 boto3
 gunicorn
 whitenoise
