@@ -148,7 +148,6 @@ DEFAULT_FILE_STORAGE = 'django_storage_supabase.storage.SupabaseStorage'
 MEDIA_URL = f"{SUPABASE_URL}/storage/v1/object/public/{SUPABASE_BUCKET_NAME}/" # media-uploads
 
 # Default primary key field type
-# https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
