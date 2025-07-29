@@ -151,26 +151,14 @@ AWS_S3_FILE_OVERWRITE = False # Não sobrescrever arquivos com o mesmo nome
 AWS_QUERYSTRING_AUTH = False # Evita adicionar credenciais na URL da imagem
 '''
 
-AWS_S3_ENDPOINT_URL = os.environ.get('SUPABASE_STORAGE_URL')
-AWS_ACCESS_KEY_ID = os.environ.get('SUPABASE_STORAGE_ACCESS_KEY') # Onde o "Access key ID" vai
-AWS_SECRET_ACCESS_KEY = os.environ.get('SUPABASE_STORAGE_SECRET_KEY') # Onde o "Secret access key" vai
-AWS_STORAGE_BUCKET_NAME = os.environ.get('SUPABASE_STORAGE_BUCKET')
+SUPABASE_URL = os.environ.get('SUPABASE_URL')
+SUPABASE_KEY = os.environ.get('SUPABASE_KEY') # Sua chave anon ou service_role
+SUPABASE_BUCKET_NAME = os.environ.get('SUPABASE_BUCKET_NAME')
 
-AWS_DEFAULT_ACL = 'public-read' # Se seu bucket é público no Supabase
-AWS_S3_FILE_OVERWRITE = False # Não sobrescrever arquivos com o mesmo nome
-AWS_QUERYSTRING_AUTH = False # Importante: Não adiciona credenciais na URL da imagem, bom para CDN.
-
-
-AWS_LOCATION = 'media-uploads'
-
-
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
-
-
-
-# --- Define o Backend de Armazenamento Padrão crucial para usar o Supabase Storage
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# Configuração do Default File Storage
+DEFAULT_FILE_STORAGE = 'django_storage_supabase.storage.SupabaseStorage'
+# Opcional: Configurar o URL base para arquivos de mídia
+MEDIA_URL = f"{SUPABASE_URL}/storage/v1/object/public/{SUPABASE_BUCKET_NAME}/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
