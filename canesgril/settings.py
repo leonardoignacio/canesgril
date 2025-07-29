@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_storage_supabase',
+     'storages',
+     #'django_storage_supabase',
 ]
 
 MIDDLEWARE = [
@@ -137,14 +138,20 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')] # Mantido, útil para estr
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
-SUPABASE_URL = os.environ.get('SUPABASE_URL')
-SUPABASE_KEY = os.environ.get('SUPABASE_KEY') # Sua chave anon ou service_role
-SUPABASE_BUCKET_NAME = os.environ.get('SUPABASE_BUCKET_NAME')
+# Configurações para django-storages com Supabase S3
+AWS_ACCESS_KEY_ID = os.environ.get('SUPABASE_S3_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('SUPABASE_S3_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = os.environ.get('SUPABASE_BUCKET_NAME') # O nome doseu bucket no Supabase
+AWS_S3_ENDPOINT_URL = os.environ.get('SUPABASE_S3_ENDPOINT_URL') # Ex:https://<project-ref>.supabase.co/storage/v1/s3
+AWS_S3_REGION_NAME = os.environ.get('SUPABASE_S3_REGION_NAME', 'us-east-1') #Região do seu projeto Supabase
+AWS_S3_SIGNATURE_VERSION = 's3v4' # Necessário para compatibilidade S3
+AWS_S3_FILE_OVERWRITE = False # Evita sobrescrever arquivos com o mesmo nome
+AWS_DEFAULT_ACL = 'public-read' # Define ACLs para objetos (pode ser 'public-read' se obucket for público ou None)
+# Configuração do Default File Storage para arquivos de mídia
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-# Configuração do Default File Storage
-DEFAULT_FILE_STORAGE = 'django_storage_supabase.storage.SupabaseStorage'
-# Opcional: Configurar o URL base para arquivos de mídia
-MEDIA_URL = f"{SUPABASE_URL}/storage/v1/object/public/{SUPABASE_BUCKET_NAME}/" # media-uploads
+# Certifique-se de que o caminho 'public' está correto para o seu bucket.
+MEDIA_URL = f"{AWS_S3_ENDPOINT_URL}/{AWS_STORAGE_BUCKET_NAME}/public/" # Ajuste'public/' se necessário
 
 # Default primary key field type
 
