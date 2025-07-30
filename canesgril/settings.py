@@ -173,7 +173,9 @@ CSRF_TRUSTED_ORIGINS = [
 
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': False,
+    'disable_existing_loggers': False, # Não desabilita loggers que já podem existir
+
+    # Define formatos de saída para os logs
     'formatters': {
         'verbose': {
             'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
@@ -184,32 +186,52 @@ LOGGING = {
             'style': '{',
         },
     },
+
+    # Define onde os logs serão enviados (neste caso, para o console/stdout)
     'handlers': {
         'console': {
-            'level': 'DEBUG',
+            'level': 'DEBUG', # O handler 'console' vai exibir mensagens de nível DEBUG e acima
             'class': 'logging.StreamHandler',
-            'formatter': 'verbose',
+            'formatter': 'verbose', # Usa o formato 'verbose' definido acima
         },
     },
+
+    # Define loggers específicos e seus níveis de verbosidade
     'loggers': {
-        'django': {
+        'django': { # Logger para o framework Django em geral
             'handlers': ['console'],
-            'level': 'INFO',
+            'level': 'INFO', # Nível INFO para logs gerais do Django
+            'propagate': False, # Impede que logs sejam enviados para o logger pai
+        },
+        'django.request': { # Logger para requisições HTTP recebidas pelo Django
+            'handlers': ['console'],
+            'level': 'DEBUG', # Nível DEBUG para ver detalhes das requisições
             'propagate': False,
         },
-        'django.request': {
+        'django_storage_supabase': { # Seu logger customizado, se estiver usando essa lib
             'handlers': ['console'],
-            'level': 'DEBUG',
+            'level': 'DEBUG', # Nível DEBUG para depurar a lib 'django_storage_supabase'
             'propagate': False,
         },
-        'django_storage_supabase': { # Adicione este logger para a biblioteca
+        'botocore': { # ESSENCIAL: Logger para o BotoCore (base do boto3), para ver chamadas de baixo nível
             'handlers': ['console'],
-            'level': 'DEBUG',
+            'level': 'DEBUG', # Nível DEBUG para capturar todas as requisições HTTP e respostas
             'propagate': False,
         },
-        '': { # Logger raiz, captura tudo que não for capturado pelos outros
+        's3transfer': { # ESSENCIAL: Logger para o s3transfer (usado pelo boto3 para uploads)
             'handlers': ['console'],
-            'level': 'DEBUG',
+            'level': 'DEBUG', # Nível DEBUG para depurar o processo de transferência
+            'propagate': False,
+        },
+        'storages': { # ESSENCIAL: Logger para o django-storages
+            'handlers': ['console'],
+            'level': 'DEBUG', # Nível DEBUG para depurar o comportamento do django-storages
+            'propagate': False,
+        },
+        '': { # Logger raiz: captura quaisquer logs que não foram tratados pelos loggers acima.
+              # Ativar DEBUG aqui é um "catch-all" para garantir que nada passe despercebido.
+            'handlers': ['console'],
+            'level': 'DEBUG', # Nível DEBUG para o logger raiz
             'propagate': False,
         },
     },
