@@ -41,7 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-     'storages',
+     'cloudinary',
+    'cloudinary.forms', 
+    'cloudinary.models', 
+     #'storages',
      #'django_storage_supabase',
 ]
 
@@ -138,20 +141,15 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')] # Mantido, útil para estr
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
-# Configurações para django-storages com Supabase S3
-AWS_ACCESS_KEY_ID = os.environ.get('SUPABASE_S3_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = os.environ.get('SUPABASE_S3_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = os.environ.get('SUPABASE_BUCKET_NAME') # O nome doseu bucket no Supabase
-AWS_S3_ENDPOINT_URL = os.environ.get('SUPABASE_S3_ENDPOINT_URL') # Ex:https://<project-ref>.supabase.co/storage/v1/s3
-#AWS_S3_REGION_NAME = os.environ.get('SUPABASE_S3_REGION_NAME', 'us-east-1') #Região do seu projeto Supabase
-AWS_S3_SIGNATURE_VERSION = 's3v4' # Necessário para compatibilidade S3
-AWS_S3_FILE_OVERWRITE = False # Evita sobrescrever arquivos com o mesmo nome
-AWS_DEFAULT_ACL = None # Define ACLs para objetos (pode ser 'public-read' se obucket for público ou None)
-# Configuração do Default File Storage para arquivos de mídia
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-# Certifique-se de que o caminho 'public' está correto para o seu bucket.
-MEDIA_URL = f"{AWS_S3_ENDPOINT_URL}/{AWS_STORAGE_BUCKET_NAME}/public/" # Ajuste'public/' se necessário
+# --- Configurações para Cloudinary ---
+CLOUDINARY_CLOUD_NAME = os.environ.get('CLOUDINARY_CLOUD_NAME')
+CLOUDINARY_API_KEY = os.environ.get('CLOUDINARY_API_KEY')
+CLOUDINARY_API_SECRET = os.environ.get('CLOUDINARY_API_SECRET')
+
+# Define armazenamento padrão para uploads de mídia
+DEFAULT_FILE_STORAGE = 'cloudinary.models.CloudinaryStorage' 
+
 
 # Default primary key field type
 

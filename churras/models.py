@@ -1,8 +1,10 @@
+# seu_app/models.py (substitua 'seu_app' pelo nome real do seu aplicativo Django)
+
 from django.db import models
 from datetime import datetime
-#from funcionario.models import Funcionario
 from django.contrib.auth.models import User
 import uuid
+from cloudinary.models import CloudinaryField
 
 def get_file_path(_instance, filename):
     ext = filename.split('.')[-1]
@@ -19,8 +21,18 @@ class Prato(models.Model):
     date_prato = models.DateTimeField(default=datetime.now, blank=True)
     funcionario = models.ForeignKey(User, default=1, on_delete=models.CASCADE)
     publicado = models.BooleanField(default=False)
-    foto_prato = models.ImageField(upload_to=get_file_path, blank=True)
-
+    foto_prato = CloudinaryField(
+        'foto_do_prato', 
+        folder='canesgril_pratos', #NOME DA PASTA DENTRO DO CLOUDINARY
+        #upload_to=get_file_path, # Para gerar o nome do arquivo
+        blank=True,
+        null=True
+    )
     def __str__(self):
         return self.nome_prato
-    
+
+    '''
+    class Meta:
+        verbose_name = 'Prato'
+        verbose_name_plural = 'Pratos'
+    '''
