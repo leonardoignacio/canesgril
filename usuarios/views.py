@@ -39,7 +39,7 @@ def dashboard(request):
     if request.user.is_authenticated:
         id = request.user.id
         pratos = Prato.objects.order_by('date_prato').filter( funcionario_id=id)
-        paginator = Paginator(pratos, 3) 
+        paginator = Paginator(pratos, 6) 
         page = request.GET.get('page') 
         pratos_por_pagina = paginator.get_page(page)
         dados = { 'lista_pratos' : pratos_por_pagina }
