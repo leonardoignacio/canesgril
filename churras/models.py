@@ -6,10 +6,12 @@ from django.contrib.auth.models import User
 import uuid
 from cloudinary.models import CloudinaryField
 
+'''
 def get_file_path(_instance, filename):
     ext = filename.split('.')[-1]
     filename = f'{uuid.uuid4()}.{ext}'
     return filename
+'''
 
 class Prato(models.Model):
     nome_prato = models.CharField(max_length=100)
@@ -24,7 +26,10 @@ class Prato(models.Model):
     foto_prato = CloudinaryField(
         'foto_do_prato', 
         folder='canesgril_pratos', #NOME DA PASTA DENTRO DO CLOUDINARY
-        #upload_to=get_file_path, # Para gerar o nome do arquivo
+        transformation={ #redimencionamento da imagem
+            'width': 600,
+            'crop': 'limit',#Outras opções: 'fill', 'scale', 'fit', 'pad'
+        },
         blank=True,
         null=True
     )
