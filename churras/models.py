@@ -27,7 +27,7 @@ class Prato(models.Model):
         'foto_do_prato', 
         folder='canesgril_pratos', #NOME DA PASTA DENTRO DO CLOUDINARY
         transformation={ #redimencionamento da imagem
-            'width': 600,
+            'width': 900,
             'crop': 'limit',#Outras opções: 'fill', 'scale', 'fit', 'pad'
         },
         blank=True,
