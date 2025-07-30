@@ -55,9 +55,11 @@
 
                             <div class="col-12 col-lg-4">
                                 <label for="file"><b>Foto utilizada</b></label>
-
-                                <img src="{{ prato.foto_prato }}" alt="">
-
+                                 {% if prato.foto_prato %}
+                                    <img src="{{ prato.foto_prato }}" alt="">
+                                 {% else %} 
+                                    <img src="" alt="">
+                                {% endif %}
                             </div>
                             <div class="col-12 col-lg-4">
                                 <label for="file"><b>Adicionar novafoto</b></label>
