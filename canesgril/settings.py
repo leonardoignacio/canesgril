@@ -146,7 +146,7 @@ AWS_S3_ENDPOINT_URL = os.environ.get('SUPABASE_S3_ENDPOINT_URL') # Ex:https://<p
 AWS_S3_REGION_NAME = os.environ.get('SUPABASE_S3_REGION_NAME', 'us-east-1') #Região do seu projeto Supabase
 AWS_S3_SIGNATURE_VERSION = 's3v4' # Necessário para compatibilidade S3
 AWS_S3_FILE_OVERWRITE = False # Evita sobrescrever arquivos com o mesmo nome
-AWS_DEFAULT_ACL = 'public-read' # Define ACLs para objetos (pode ser 'public-read' se obucket for público ou None)
+AWS_DEFAULT_ACL = None # Define ACLs para objetos (pode ser 'public-read' se obucket for público ou None)
 # Configuração do Default File Storage para arquivos de mídia
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
