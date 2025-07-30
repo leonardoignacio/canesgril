@@ -88,7 +88,7 @@ def cria_prato(request):
             foto_prato = request.FILES['foto_prato']
         user = get_object_or_404(User, pk=request.user.id) 
         prato = Prato.objects.create(
-            pessoa=user, 
+            funcionario=user, 
             nome_prato=nome_prato, 
             ingredientes=ingredientes, 
             modo_preparo=modo_preparo,
