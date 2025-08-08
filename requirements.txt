@@ -12,5 +12,8 @@ sqlparse
 tzdata
 whitenoise
 cloudinary
+djangorestframework
+djangorestframework-simplejwt
+markdown
 gunicorn
 whitenoise
